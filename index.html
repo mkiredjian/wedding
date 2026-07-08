@@ -305,6 +305,47 @@
   }
   .links a:hover{color:var(--blush);}
 
+  .venue-photo{
+    margin:22px auto 4px;
+    max-width:220px;
+    opacity:0;
+    animation:fadeUp 1s ease-out 3.4s forwards;
+  }
+  .venue-photo-frame{
+    position:relative;
+    padding:8px;
+    background:#FFFDF9;
+    border:1px solid var(--gold);
+    box-shadow:
+      0 0 0 5px #FFFDF9,
+      0 0 0 6px rgba(201,166,107,0.55),
+      0 20px 40px -18px rgba(60,50,20,0.45);
+    border-radius:2px;
+  }
+  .venue-photo-frame img{
+    display:block;
+    width:100%;
+    height:auto;
+    border-radius:1px;
+    filter:sepia(0.12) saturate(1.05) contrast(1.02);
+  }
+  .venue-photo-frame::before{
+    content:'';
+    position:absolute;
+    inset:3px;
+    border:1px solid rgba(201,166,107,0.5);
+    pointer-events:none;
+  }
+  .venue-caption{
+    margin-top:10px;
+    font-family:'EB Garamond', serif;
+    font-style:italic;
+    font-size:12px;
+    letter-spacing:0.3px;
+    color:#8a8a7c;
+    text-align:center;
+  }
+
   /* music control */
   .music-btn{
     position:fixed;
@@ -743,6 +784,13 @@
 
   <p class="rsvp fade">Kindly confirm your presence before <b>August 1, 2026</b></p>
   <p class="contacts fade">Julien: 03 356 610 &nbsp;|&nbsp; Angie: 70 318 857</p>
+
+  <div class="venue-photo">
+    <div class="venue-photo-frame">
+      <img src="assets/church.jpg" alt="Cathedral of Our Lady of the Annunciation">
+    </div>
+    <p class="venue-caption">Cathedral of Our Lady of the Annunciation</p>
+  </div>
 
   <div class="links fade">
     <a href="https://www.google.com/maps/place/N.d.+De+L'annonciation+-+Church/@33.8796358,35.5175006,1270m/data=!3m2!1e3!4b1!4m6!3m5!1s0x151f17068bc34127:0xe25b18d91793dc21!8m2!3d33.8796358!4d35.5175006!16s%2Fg%2F1tdhvw99?entry=ttu&amp;g_ep=EgoyMDI2MDcwNS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">📍 Church location</a>
