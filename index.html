@@ -58,7 +58,7 @@
     position:relative;
     width:min(92vw, 560px);
     padding:56px 40px 46px;
-    background:#FFFDF9;
+    background:#FFFDF9 url("assets/border-frame.png") center / 100% 100% no-repeat;
     box-shadow:0 30px 70px -30px rgba(60,50,20,0.35), 0 0 0 1px rgba(140,120,80,0.08);
     border-radius:2px;
     text-align:center;
@@ -67,15 +67,7 @@
     transform:translateY(24px) scale(0.98);
     animation:cardIn 1.4s cubic-bezier(.16,.8,.28,1) 0.3s forwards;
   }
-  .card::before{
-    content:'';
-    position:absolute;
-    inset:14px;
-    border:1px solid rgba(201,166,107,0.55);
-    pointer-events:none;
-    opacity:0;
-    animation:fadeUp 1.2s ease-out 1.6s forwards;
-  }
+  /* old thin inset border removed — the border-frame.png image now provides its own gold line */
   @keyframes cardIn{
     to{opacity:1; transform:translateY(0) scale(1);}
   }
@@ -178,11 +170,12 @@
   /* switched to a real rose-photo frame; hide the old illustrated SVG florals */
   .vine, .edge-border{ display:none !important; }
 
-  .rose-frame{
+  .rose-frame{ display:none !important; }
+  ._unused_rose_frame_rule{
     position:absolute;
-    inset:70px;
-    width:calc(100% - 140px);
-    height:calc(100% - 140px);
+    inset:-14px;
+    width:calc(100% + 28px);
+    height:calc(100% + 28px);
     object-fit:fill;
     pointer-events:none;
     z-index:-1;
