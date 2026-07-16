@@ -139,57 +139,6 @@
   .vine.bl{bottom:-18px; left:-18px; transform:scaleY(-1);}
   .vine.br{bottom:-18px; right:-18px; transform:scale(-1,-1);}
 
-
-  /* continuous floral border strips connecting the corners */
-  .edge-border{
-    position:absolute;
-    z-index:1;
-    pointer-events:none;
-    opacity:0;
-    animation:fadeUp 1.4s ease-out 2.6s forwards;
-  }
-  .edge-border.top{
-    top:-10px; left:140px; right:140px; height:26px;
-    background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA3MCAyNic+CiAgPHBhdGggZD0nTTAsMTMgQzE1LDMgMjUsMjMgMzUsMTMgQzQ1LDMgNTUsMjMgNzAsMTMnIGZpbGw9J25vbmUnIHN0cm9rZT0nIzVDNkIzRicgc3Ryb2tlLXdpZHRoPScxLjMnLz4KICA8ZWxsaXBzZSBjeD0nMTYnIGN5PSc3JyByeD0nNScgcnk9JzInIGZpbGw9JyM1QzZCM0YnIG9wYWNpdHk9JzAuOCcgdHJhbnNmb3JtPSdyb3RhdGUoLTI1IDE2IDcpJy8+CiAgPGVsbGlwc2UgY3g9JzU0JyBjeT0nMTknIHJ4PSc1JyByeT0nMicgZmlsbD0nIzVDNkIzRicgb3BhY2l0eT0nMC44JyB0cmFuc2Zvcm09J3JvdGF0ZSgyMCA1NCAxOSknLz4KICA8ZyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSgzNSwxMykgc2NhbGUoMC41KSc+CiAgICA8ZWxsaXBzZSBjeD0nMCcgY3k9Jy02JyByeD0nNScgcnk9JzcuNScgZmlsbD0nI0U4QTlBNicvPgogICAgPGVsbGlwc2UgY3g9JzAnIGN5PSctNicgcng9JzUnIHJ5PSc3LjUnIGZpbGw9JyNFOEE5QTYnIHRyYW5zZm9ybT0ncm90YXRlKDcyKScvPgogICAgPGVsbGlwc2UgY3g9JzAnIGN5PSctNicgcng9JzUnIHJ5PSc3LjUnIGZpbGw9JyNFOEE5QTYnIHRyYW5zZm9ybT0ncm90YXRlKDE0NCknLz4KICAgIDxlbGxpcHNlIGN4PScwJyBjeT0nLTYnIHJ4PSc1JyByeT0nNy41JyBmaWxsPScjRThBOUE2JyB0cmFuc2Zvcm09J3JvdGF0ZSgyMTYpJy8+CiAgICA8ZWxsaXBzZSBjeD0nMCcgY3k9Jy02JyByeD0nNScgcnk9JzcuNScgZmlsbD0nI0U4QTlBNicgdHJhbnNmb3JtPSdyb3RhdGUoMjg4KScvPgogICAgPGNpcmNsZSBjeD0nMCcgY3k9JzAnIHI9JzMnIGZpbGw9JyNDOUE2NkInLz4KICA8L2c+Cjwvc3ZnPg==");
-    background-repeat:repeat-x;
-    background-size:70px 26px;
-  }
-  .edge-border.bottom{
-    bottom:-10px; left:140px; right:140px; height:26px;
-    background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA3MCAyNic+CiAgPHBhdGggZD0nTTAsMTMgQzE1LDMgMjUsMjMgMzUsMTMgQzQ1LDMgNTUsMjMgNzAsMTMnIGZpbGw9J25vbmUnIHN0cm9rZT0nIzVDNkIzRicgc3Ryb2tlLXdpZHRoPScxLjMnLz4KICA8ZWxsaXBzZSBjeD0nMTYnIGN5PSc3JyByeD0nNScgcnk9JzInIGZpbGw9JyM1QzZCM0YnIG9wYWNpdHk9JzAuOCcgdHJhbnNmb3JtPSdyb3RhdGUoLTI1IDE2IDcpJy8+CiAgPGVsbGlwc2UgY3g9JzU0JyBjeT0nMTknIHJ4PSc1JyByeT0nMicgZmlsbD0nIzVDNkIzRicgb3BhY2l0eT0nMC44JyB0cmFuc2Zvcm09J3JvdGF0ZSgyMCA1NCAxOSknLz4KICA8ZyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSgzNSwxMykgc2NhbGUoMC41KSc+CiAgICA8ZWxsaXBzZSBjeD0nMCcgY3k9Jy02JyByeD0nNScgcnk9JzcuNScgZmlsbD0nI0U4QTlBNicvPgogICAgPGVsbGlwc2UgY3g9JzAnIGN5PSctNicgcng9JzUnIHJ5PSc3LjUnIGZpbGw9JyNFOEE5QTYnIHRyYW5zZm9ybT0ncm90YXRlKDcyKScvPgogICAgPGVsbGlwc2UgY3g9JzAnIGN5PSctNicgcng9JzUnIHJ5PSc3LjUnIGZpbGw9JyNFOEE5QTYnIHRyYW5zZm9ybT0ncm90YXRlKDE0NCknLz4KICAgIDxlbGxpcHNlIGN4PScwJyBjeT0nLTYnIHJ4PSc1JyByeT0nNy41JyBmaWxsPScjRThBOUE2JyB0cmFuc2Zvcm09J3JvdGF0ZSgyMTYpJy8+CiAgICA8ZWxsaXBzZSBjeD0nMCcgY3k9Jy02JyByeD0nNScgcnk9JzcuNScgZmlsbD0nI0U4QTlBNicgdHJhbnNmb3JtPSdyb3RhdGUoMjg4KScvPgogICAgPGNpcmNsZSBjeD0nMCcgY3k9JzAnIHI9JzMnIGZpbGw9JyNDOUE2NkInLz4KICA8L2c+Cjwvc3ZnPg==");
-    background-repeat:repeat-x;
-    background-size:70px 26px;
-    transform:scaleY(-1);
-  }
-  .edge-border.left{
-    left:-10px; top:140px; bottom:140px; width:26px;
-    background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyNiA3MCc+CiAgPHBhdGggZD0nTTEzLDAgQzMsMTUgMjMsMjUgMTMsMzUgQzMsNDUgMjMsNTUgMTMsNzAnIGZpbGw9J25vbmUnIHN0cm9rZT0nIzVDNkIzRicgc3Ryb2tlLXdpZHRoPScxLjMnLz4KICA8ZWxsaXBzZSBjeD0nNycgY3k9JzE2JyByeD0nMicgcnk9JzUnIGZpbGw9JyM1QzZCM0YnIG9wYWNpdHk9JzAuOCcgdHJhbnNmb3JtPSdyb3RhdGUoLTI1IDcgMTYpJy8+CiAgPGVsbGlwc2UgY3g9JzE5JyBjeT0nNTQnIHJ4PScyJyByeT0nNScgZmlsbD0nIzVDNkIzRicgb3BhY2l0eT0nMC44JyB0cmFuc2Zvcm09J3JvdGF0ZSgyMCAxOSA1NCknLz4KICA8ZyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSgxMywzNSkgc2NhbGUoMC41KSc+CiAgICA8ZWxsaXBzZSBjeD0nMCcgY3k9Jy02JyByeD0nNScgcnk9JzcuNScgZmlsbD0nI0M2QjRENicvPgogICAgPGVsbGlwc2UgY3g9JzAnIGN5PSctNicgcng9JzUnIHJ5PSc3LjUnIGZpbGw9JyNDNkI0RDYnIHRyYW5zZm9ybT0ncm90YXRlKDcyKScvPgogICAgPGVsbGlwc2UgY3g9JzAnIGN5PSctNicgcng9JzUnIHJ5PSc3LjUnIGZpbGw9JyNDNkI0RDYnIHRyYW5zZm9ybT0ncm90YXRlKDE0NCknLz4KICAgIDxlbGxpcHNlIGN4PScwJyBjeT0nLTYnIHJ4PSc1JyByeT0nNy41JyBmaWxsPScjQzZCNEQ2JyB0cmFuc2Zvcm09J3JvdGF0ZSgyMTYpJy8+CiAgICA8ZWxsaXBzZSBjeD0nMCcgY3k9Jy02JyByeD0nNScgcnk9JzcuNScgZmlsbD0nI0M2QjRENicgdHJhbnNmb3JtPSdyb3RhdGUoMjg4KScvPgogICAgPGNpcmNsZSBjeD0nMCcgY3k9JzAnIHI9JzMnIGZpbGw9JyNDOUE2NkInLz4KICA8L2c+Cjwvc3ZnPg==");
-    background-repeat:repeat-y;
-    background-size:26px 70px;
-  }
-  .edge-border.right{
-    right:-10px; top:140px; bottom:140px; width:26px;
-    background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyNiA3MCc+CiAgPHBhdGggZD0nTTEzLDAgQzMsMTUgMjMsMjUgMTMsMzUgQzMsNDUgMjMsNTUgMTMsNzAnIGZpbGw9J25vbmUnIHN0cm9rZT0nIzVDNkIzRicgc3Ryb2tlLXdpZHRoPScxLjMnLz4KICA8ZWxsaXBzZSBjeD0nNycgY3k9JzE2JyByeD0nMicgcnk9JzUnIGZpbGw9JyM1QzZCM0YnIG9wYWNpdHk9JzAuOCcgdHJhbnNmb3JtPSdyb3RhdGUoLTI1IDcgMTYpJy8+CiAgPGVsbGlwc2UgY3g9JzE5JyBjeT0nNTQnIHJ4PScyJyByeT0nNScgZmlsbD0nIzVDNkIzRicgb3BhY2l0eT0nMC44JyB0cmFuc2Zvcm09J3JvdGF0ZSgyMCAxOSA1NCknLz4KICA8ZyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSgxMywzNSkgc2NhbGUoMC41KSc+CiAgICA8ZWxsaXBzZSBjeD0nMCcgY3k9Jy02JyByeD0nNScgcnk9JzcuNScgZmlsbD0nI0M2QjRENicvPgogICAgPGVsbGlwc2UgY3g9JzAnIGN5PSctNicgcng9JzUnIHJ5PSc3LjUnIGZpbGw9JyNDNkI0RDYnIHRyYW5zZm9ybT0ncm90YXRlKDcyKScvPgogICAgPGVsbGlwc2UgY3g9JzAnIGN5PSctNicgcng9JzUnIHJ5PSc3LjUnIGZpbGw9JyNDNkI0RDYnIHRyYW5zZm9ybT0ncm90YXRlKDE0NCknLz4KICAgIDxlbGxpcHNlIGN4PScwJyBjeT0nLTYnIHJ4PSc1JyByeT0nNy41JyBmaWxsPScjQzZCNEQ2JyB0cmFuc2Zvcm09J3JvdGF0ZSgyMTYpJy8+CiAgICA8ZWxsaXBzZSBjeD0nMCcgY3k9Jy02JyByeD0nNScgcnk9JzcuNScgZmlsbD0nI0M2QjRENicgdHJhbnNmb3JtPSdyb3RhdGUoMjg4KScvPgogICAgPGNpcmNsZSBjeD0nMCcgY3k9JzAnIHI9JzMnIGZpbGw9JyNDOUE2NkInLz4KICA8L2c+Cjwvc3ZnPg==");
-    background-repeat:repeat-y;
-    background-size:26px 70px;
-    transform:scaleX(-1);
-  }
-
-  /* switched to a real rose-photo frame; hide the old illustrated SVG florals */
-  .vine, .edge-border{ display:none !important; }
-
-  .rose-frame{
-    position:absolute;
-    inset:-26px;
-    width:calc(100% + 52px);
-    height:calc(100% + 52px);
-    object-fit:fill;
-    pointer-events:none;
-    z-index:-1;
-    opacity:0;
-    animation:fadeUp 1.6s ease-out 0.5s forwards;
-  }
-
   .bloom-g{
     opacity:0;
     transform-box: fill-box;
@@ -379,15 +328,6 @@
     height:auto;
     border-radius:1px;
     filter:sepia(0.12) saturate(1.05) contrast(1.02);
-    transition:filter 0.25s ease, transform 0.25s ease;
-  }
-  .venue-photo-frame a{
-    display:block;
-    cursor:pointer;
-  }
-  .venue-photo-frame a:hover img{
-    filter:sepia(0.05) saturate(1.1) contrast(1.03);
-    transform:scale(1.015);
   }
   .venue-photo-frame::before{
     content:'';
@@ -556,12 +496,6 @@
 <div class="glow c"></div>
 
 <div class="card" id="card">
-  <img class="rose-frame" src="assets/rose-frame.png" alt="">
-  <div class="edge-border top"></div>
-  <div class="edge-border bottom"></div>
-  <div class="edge-border left"></div>
-  <div class="edge-border right"></div>
-
   <div class="vine tl"><svg viewBox="0 0 150 150">
     <path d="M5,5 C 20,40 10,70 40,80 C 70,90 60,50 90,55 C 115,59 110,90 140,95"/>
     <g class="bloom-g" style="animation-delay:1.85s">
@@ -853,9 +787,7 @@
 
   <div class="venue-photo">
     <div class="venue-photo-frame">
-      <a href="https://www.google.com/maps/place/N.d.+De+L'annonciation+-+Church/@33.8796358,35.5175006,1270m/data=!3m2!1e3!4b1!4m6!3m5!1s0x151f17068bc34127:0xe25b18d91793dc21!8m2!3d33.8796358!4d35.5175006!16s%2Fg%2F1tdhvw99?entry=ttu&amp;g_ep=EgoyMDI2MDcwNS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">
-        <img src="assets/church.jpg" alt="Cathedral of Our Lady of the Annunciation">
-      </a>
+      <img src="assets/church.jpg" alt="Cathedral of Our Lady of the Annunciation">
     </div>
     <p class="venue-caption">Cathedral of Our Lady of the Annunciation</p>
   </div>
