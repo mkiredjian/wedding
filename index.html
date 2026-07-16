@@ -180,9 +180,9 @@
 
   .rose-frame{
     position:absolute;
-    inset:-26px;
-    width:calc(100% + 52px);
-    height:calc(100% + 52px);
+    inset:6px;
+    width:calc(100% - 12px);
+    height:calc(100% - 12px);
     object-fit:fill;
     pointer-events:none;
     z-index:-1;
@@ -338,23 +338,49 @@
   .contacts{font-size:13px; letter-spacing:0.5px; color:var(--olive-dark); margin-top:6px; animation-delay:3.4s;}
 
   .links{
-    margin-top:20px;
+    margin-top:24px;
     display:flex;
-    gap:22px;
+    gap:14px;
     justify-content:center;
     flex-wrap:wrap;
     animation-delay:3.55s;
   }
   .links a{
-    font-size:12.5px;
-    color:var(--olive);
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-size:13px;
+    color:var(--olive-dark);
     text-decoration:none;
-    border-bottom:1px solid var(--gold);
-    padding-bottom:2px;
-    font-style:italic;
-    transition:color 0.2s;
+    font-style:normal;
+    font-weight:500;
+    letter-spacing:0.2px;
+    background:#FFFDF9;
+    border:1px solid var(--gold);
+    border-radius:999px;
+    padding:10px 18px;
+    box-shadow:0 6px 16px -8px rgba(60,50,20,0.35);
+    transition:background 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
   }
-  .links a:hover{color:var(--blush);}
+  .links a:hover, .links a:active{
+    background:var(--gold);
+    color:#FFFDF9;
+    transform:translateY(-1px);
+    box-shadow:0 8px 20px -8px rgba(60,50,20,0.45);
+  }
+
+  @media (max-width:480px){
+    .links{
+      flex-direction:column;
+      align-items:stretch;
+      gap:10px;
+    }
+    .links a{
+      justify-content:center;
+      padding:12px 18px;
+      font-size:13.5px;
+    }
+  }
 
   .venue-photo{
     margin:22px auto 4px;
@@ -850,15 +876,6 @@
 
   <p class="rsvp fade">Kindly confirm your presence before <b>August 1, 2026</b></p>
   <p class="contacts fade">Julien: 03 356 610 &nbsp;|&nbsp; Angie: 70 318 857</p>
-
-  <div class="venue-photo">
-    <div class="venue-photo-frame">
-      <a href="https://www.google.com/maps/place/N.d.+De+L'annonciation+-+Church/@33.8796358,35.5175006,1270m/data=!3m2!1e3!4b1!4m6!3m5!1s0x151f17068bc34127:0xe25b18d91793dc21!8m2!3d33.8796358!4d35.5175006!16s%2Fg%2F1tdhvw99?entry=ttu&amp;g_ep=EgoyMDI2MDcwNS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">
-        <img src="assets/church.jpg" alt="Cathedral of Our Lady of the Annunciation">
-      </a>
-    </div>
-    <p class="venue-caption">Cathedral of Our Lady of the Annunciation</p>
-  </div>
 
   <div class="links fade">
     <a href="https://www.google.com/maps/place/N.d.+De+L'annonciation+-+Church/@33.8796358,35.5175006,1270m/data=!3m2!1e3!4b1!4m6!3m5!1s0x151f17068bc34127:0xe25b18d91793dc21!8m2!3d33.8796358!4d35.5175006!16s%2Fg%2F1tdhvw99?entry=ttu&amp;g_ep=EgoyMDI2MDcwNS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">📍 Church location</a>
