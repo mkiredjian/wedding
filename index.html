@@ -475,6 +475,17 @@
     *{animation-duration:0.01ms !important; animation-iteration-count:1 !important;}
   }
 
+  /* floral border overlay */
+  .page-border{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    z-index:5;
+    object-fit:fill;
+  }
+
   /* --- envelope intro screen --- */
   #inviteContent{
     opacity:0;
@@ -556,6 +567,8 @@
 </style>
 </head>
 <body>
+
+<img class="page-border" src="assets/border.PNG" alt="">
 
 <div id="envelopeScreen">
   <div class="envelope-title">💍 Welcome to Our Wedding</div>
