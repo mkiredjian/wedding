@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Julien & Angie — Wedding Invitation</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Parisienne&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FBF6EE;
+    --olive:#5C6B3F;
+    --olive-dark:#3E4A2A;
+    --blush:#E8A9A6;
+    --lilac:#C6B4D6;
+    --gold:#C9A66B;
+    --skyblue:#A9C4D4;
+    --ink:#3A3A32;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    min-height:100vh;
+    background:
+      radial-gradient(ellipse at top left, rgba(198,180,214,0.10), transparent 55%),
+      radial-gradient(ellipse at bottom right, rgba(169,196,212,0.12), transparent 55%),
+      var(--cream);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'EB Garamond', serif;
+    color:var(--ink);
+    overflow-x:hidden;
+    position:relative;
+  }
+
+  /* ambient floating petals */
+  .petal{
+    position:fixed;
+    top:-40px;
+    pointer-events:none;
+    opacity:0.75;
+    z-index:100;
+    animation-name:fall, sway;
+    animation-timing-function:linear, ease-in-out;
+    animation-iteration-count:infinite, infinite;
+  }
+  @keyframes fall{
+    from{transform:translateY(-5vh) rotate(0deg);}
+    to{transform:translateY(105vh) rotate(340deg);}
+  }
+  @keyframes sway{
+    0%,100%{margin-left:0px;}
+    50%{margin-left:40px;}
+  }
+
+  .card{
+    position:relative;
+    width:min(94vw, 560px);
+    padding:clamp(36px,5vw,56px) clamp(24px,4.5vw,40px) clamp(50px,7vw,78px);
+    background:#FFFDF9 url("../assets/Gold-Vintage-Ornate-Frame.jpg.jpeg") center / 100% 100% no-repeat;
+    box-shadow:0 30px 70px -30px rgba(60,50,20,0.35), 0 0 0 1px rgba(140,120,80,0.08);
+    border-radius:2px;
+    text-align:center;
+    z-index:2;
+    opacity:0;
+    transform:translateY(24px) scale(0.98);
+    animation:cardIn 1.4s cubic-bezier(.16,.8,.28,1) 0.3s forwards;
+  }
+  @keyframes cardIn{
+    to{opacity:1; transform:translateY(0) scale(1);}
+  }
+
+  /* warm ambient glow behind the card, for a soft candlelit wedding feel */
+  .glow{
+    position:fixed;
+    border-radius:50%;
+    filter:blur(60px);
+    z-index:0;
+    opacity:0.55;
+    animation:glowPulse 7s ease-in-out infinite;
+  }
+  .glow.a{width:380px;height:380px; background:radial-gradient(circle, rgba(232,169,166,0.55), transparent 70%); top:8%; left:6%; animation-delay:0s;}
+  .glow.b{width:420px;height:420px; background:radial-gradient(circle, rgba(201,166,107,0.4), transparent 70%); bottom:6%; right:6%; animation-delay:2.3s;}
+  .glow.c{width:300px;height:300px; background:radial-gradient(circle, rgba(198,180,214,0.4), transparent 70%); top:45%; left:70%; animation-delay:4.1s;}
+  @keyframes glowPulse{
+    0%,100%{opacity:0.35; transform:scale(1);}
+    50%{opacity:0.65; transform:scale(1.12);}
+  }
+
+  /* twinkling gold sparkles, like soft fairy lights */
+  .sparkle{
+    position:fixed;
+    border-radius:50%;
+    background:radial-gradient(circle, #FFF3D6, var(--gold) 70%);
+    box-shadow:0 0 6px 1px rgba(201,166,107,0.6);
+    z-index:1;
+    pointer-events:none;
+    animation-name:twinkle;
+    animation-timing-function:ease-in-out;
+    animation-iteration-count:infinite;
+  }
+  @keyframes twinkle{
+    0%,100%{opacity:0.15; transform:scale(0.7);}
+    50%{opacity:1; transform:scale(1.15);}
+  }
+
+  /* corner vine motif, drawn with SVG stroke animation */
+  .vine{
+    position:absolute;
+    width:172px;
+    height:172px;
+    opacity:0;
+    animation:vineIn 1.6s ease-out 0.6s forwards;
+  }
+  .vine svg{width:100%;height:100%; overflow:visible;}
+  .vine path{
+    fill:none;
+    stroke:var(--olive);
+    stroke-width:1.4;
+    stroke-linecap:round;
+    stroke-dasharray:340;
+    stroke-dashoffset:340;
+    animation:draw 2.2s ease-out 0.8s forwards;
+  }
+  @keyframes draw{ to{stroke-dashoffset:0;} }
+  @keyframes vineIn{ to{opacity:1;} }
+  .vine.tl{top:-18px; left:-18px;}
+  .vine.tr{top:-18px; right:-18px; transform:scaleX(-1);}
+  .vine.bl{bottom:-18px; left:-18px; transform:scaleY(-1);}
+  .vine.br{bottom:-18px; right:-18px; transform:scale(-1,-1);}
+
+
+  /* continuous floral border strips connecting the corners */
+  .edge-border{
+    position:absolute;
+    z-index:1;
+    pointer-events:none;
+    opacity:0;
+    animation:fadeUp 1.4s ease-out 2.6s forwards;
+  }
+  .edge-border.top{
+    top:-10px; left:140px; right:140px; height:26px;
+    background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA3MCAyNic+CiAgPHBhdGggZD0nTTAsMTMgQzE1LDMgMjUsMjMgMzUsMTMgQzQ1LDMgNTUsMjMgNzAsMTMnIGZpbGw9J25vbmUnIHN0cm9rZT0nIzVDNkIzRicgc3Ryb2tlLXdpZHRoPScxLjMnLz4KICA8ZWxsaXBzZSBjeD0nMTYnIGN5PSc3JyByeD0nNScgcnk9JzInIGZpbGw9JyM1QzZCM0YnIG9wYWNpdHk9JzAuOCcgdHJhbnNmb3JtPSdyb3RhdGUoLTI1IDE2IDcpJy8+CiAgPGVsbGlwc2UgY3g9JzU0JyBjeT0nMTknIHJ4PSc1JyByeT0nMicgZmlsbD0nIzVDNkIzRicgb3BhY2l0eT0nMC44JyB0cmFuc2Zvcm09J3JvdGF0ZSgyMCA1NCAxOSknLz4KICA8ZyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSgzNSwxMykgc2NhbGUoMC41KSc+CiAgICA8ZWxsaXBzZSBjeD0nMCcgY3k9Jy02JyByeD0nNScgcnk9JzcuNScgZmlsbD0nI0U4QTlBNicvPgogICAgPGVsbGlwc2UgY3g9JzAnIGN5PSctNicgcng9JzUnIHJ5PSc3LjUnIGZpbGw9JyNFOEE5QTYnIHRyYW5zZm9ybT0ncm90YXRlKDcyKScvPgogICAgPGVsbGlwc2UgY3g9JzAnIGN5PSctNicgcng9JzUnIHJ5PSc3LjUnIGZpbGw9JyNFOEE5QTYnIHRyYW5zZm9ybT0ncm90YXRlKDE0NCknLz4KICAgIDxlbGxpcHNlIGN4PScwJyBjeT0nLTYnIHJ4PSc1JyByeT0nNy41JyBmaWxsPScjRThBOUE2JyB0cmFuc2Zvcm09J3JvdGF0ZSgyMTYpJy8+CiAgICA8ZWxsaXBzZSBjeD0nMCcgY3k9Jy02JyByeD0nNScgcnk9JzcuNScgZmlsbD0nI0U4QTlBNicgdHJhbnNmb3JtPSdyb3RhdGUoMjg4KScvPgogICAgPGNpcmNsZSBjeD0nMCcgY3k9JzAnIHI9JzMnIGZpbGw9JyNDOUE2NkInLz4KICA8L2c+Cjwvc3ZnPg==");
+    background-repeat:repeat-x;
+    background-size:70px 26px;
+  }
+  .edge-border.bottom{
+    bottom:-10px; left:140px; right:140px; height:26px;
+    background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA3MCAyNic+CiAgPHBhdGggZD0nTTAsMTMgQzE1LDMgMjUsMjMgMzUsMTMgQzQ1LDMgNTUsMjMgNzAsMTMnIGZpbGw9J25vbmUnIHN0cm9rZT0nIzVDNkIzRicgc3Ryb2tlLXdpZHRoPScxLjMnLz4KICA8ZWxsaXBzZSBjeD0nMTYnIGN5PSc3JyByeD0nNScgcnk9JzInIGZpbGw9JyM1QzZCM0YnIG9wYWNpdHk9JzAuOCcgdHJhbnNmb3JtPSdyb3RhdGUoLTI1IDE2IDcpJy8+CiAgPGVsbGlwc2UgY3g9JzU0JyBjeT0nMTknIHJ4PSc1JyByeT0nMicgZmlsbD0nIzVDNkIzRicgb3BhY2l0eT0nMC44JyB0cmFuc2Zvcm09J3JvdGF0ZSgyMCA1NCAxOSknLz4KICA8ZyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSgzNSwxMykgc2NhbGUoMC41KSc+CiAgICA8ZWxsaXBzZSBjeD0nMCcgY3k9Jy02JyByeD0nNScgcnk9JzcuNScgZmlsbD0nI0U4QTlBNicvPgogICAgPGVsbGlwc2UgY3g9JzAnIGN5PSctNicgcng9JzUnIHJ5PSc3LjUnIGZpbGw9JyNFOEE5QTYnIHRyYW5zZm9ybT0ncm90YXRlKDcyKScvPgogICAgPGVsbGlwc2UgY3g9JzAnIGN5PSctNicgcng9JzUnIHJ5PSc3LjUnIGZpbGw9JyNFOEE5QTYnIHRyYW5zZm9ybT0ncm90YXRlKDE0NCknLz4KICAgIDxlbGxpcHNlIGN4PScwJyBjeT0nLTYnIHJ4PSc1JyByeT0nNy41JyBmaWxsPScjRThBOUE2JyB0cmFuc2Zvcm09J3JvdGF0ZSgyMTYpJy8+CiAgICA8ZWxsaXBzZSBjeD0nMCcgY3k9Jy02JyByeD0nNScgcnk9JzcuNScgZmlsbD0nI0U4QTlBNicgdHJhbnNmb3JtPSdyb3RhdGUoMjg4KScvPgogICAgPGNpcmNsZSBjeD0nMCcgY3k9JzAnIHI9JzMnIGZpbGw9JyNDOUE2NkInLz4KICA8L2c+Cjwvc3ZnPg==");
+    background-repeat:repeat-x;
+    background-size:70px 26px;
+    transform:scaleY(-1);
+  }
+  .edge-border.left{
+    left:-10px; top:140px; bottom:140px; width:26px;
+    background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyNiA3MCc+CiAgPHBhdGggZD0nTTEzLDAgQzMsMTUgMjMsMjUgMTMsMzUgQzMsNDUgMjMsNTUgMTMsNzAnIGZpbGw9J25vbmUnIHN0cm9rZT0nIzVDNkIzRicgc3Ryb2tlLXdpZHRoPScxLjMnLz4KICA8ZWxsaXBzZSBjeD0nNycgY3k9JzE2JyByeD0nMicgcnk9JzUnIGZpbGw9JyM1QzZCM0YnIG9wYWNpdHk9JzAuOCcgdHJhbnNmb3JtPSdyb3RhdGUoLTI1IDcgMTYpJy8+CiAgPGVsbGlwc2UgY3g9JzE5JyBjeT0nNTQnIHJ4PScyJyByeT0nNScgZmlsbD0nIzVDNkIzRicgb3BhY2l0eT0nMC44JyB0cmFuc2Zvcm09J3JvdGF0ZSgyMCAxOSA1NCknLz4KICA8ZyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSgxMywzNSkgc2NhbGUoMC41KSc+CiAgICA8ZWxsaXBzZSBjeD0nMCcgY3k9Jy02JyByeD0nNScgcnk9JzcuNScgZmlsbD0nI0M2QjRENicvPgogICAgPGVsbGlwc2UgY3g9JzAnIGN5PSctNicgcng9JzUnIHJ5PSc3LjUnIGZpbGw9JyNDNkI0RDYnIHRyYW5zZm9ybT0ncm90YXRlKDcyKScvPgogICAgPGVsbGlwc2UgY3g9JzAnIGN5PSctNicgcng9JzUnIHJ5PSc3LjUnIGZpbGw9JyNDNkI0RDYnIHRyYW5zZm9ybT0ncm90YXRlKDE0NCknLz4KICAgIDxlbGxpcHNlIGN4PScwJyBjeT0nLTYnIHJ4PSc1JyByeT0nNy41JyBmaWxsPScjQzZCNEQ2JyB0cmFuc2Zvcm09J3JvdGF0ZSgyMTYpJy8+CiAgICA8ZWxsaXBzZSBjeD0nMCcgY3k9Jy02JyByeD0nNScgcnk9JzcuNScgZmlsbD0nI0M2QjRENicgdHJhbnNmb3JtPSdyb3RhdGUoMjg4KScvPgogICAgPGNpcmNsZSBjeD0nMCcgY3k9JzAnIHI9JzMnIGZpbGw9JyNDOUE2NkInLz4KICA8L2c+Cjwvc3ZnPg==");
+    background-repeat:repeat-y;
+    background-size:26px 70px;
+  }
+  .edge-border.right{
+    right:-10px; top:140px; bottom:140px; width:26px;
+    background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyNiA3MCc+CiAgPHBhdGggZD0nTTEzLDAgQzMsMTUgMjMsMjUgMTMsMzUgQzMsNDUgMjMsNTUgMTMsNzAnIGZpbGw9J25vbmUnIHN0cm9rZT0nIzVDNkIzRicgc3Ryb2tlLXdpZHRoPScxLjMnLz4KICA8ZWxsaXBzZSBjeD0nNycgY3k9JzE2JyByeD0nMicgcnk9JzUnIGZpbGw9JyM1QzZCM0YnIG9wYWNpdHk9JzAuOCcgdHJhbnNmb3JtPSdyb3RhdGUoLTI1IDcgMTYpJy8+CiAgPGVsbGlwc2UgY3g9JzE5JyBjeT0nNTQnIHJ4PScyJyByeT0nNScgZmlsbD0nIzVDNkIzRicgb3BhY2l0eT0nMC44JyB0cmFuc2Zvcm09J3JvdGF0ZSgyMCAxOSA1NCknLz4KICA8ZyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSgxMywzNSkgc2NhbGUoMC41KSc+CiAgICA8ZWxsaXBzZSBjeD0nMCcgY3k9Jy02JyByeD0nNScgcnk9JzcuNScgZmlsbD0nI0M2QjRENicvPgogICAgPGVsbGlwc2UgY3g9JzAnIGN5PSctNicgcng9JzUnIHJ5PSc3LjUnIGZpbGw9JyNDNkI0RDYnIHRyYW5zZm9ybT0ncm90YXRlKDcyKScvPgogICAgPGVsbGlwc2UgY3g9JzAnIGN5PSctNicgcng9JzUnIHJ5PSc3LjUnIGZpbGw9JyNDNkI0RDYnIHRyYW5zZm9ybT0ncm90YXRlKDE0NCknLz4KICAgIDxlbGxpcHNlIGN4PScwJyBjeT0nLTYnIHJ4PSc1JyByeT0nNy41JyBmaWxsPScjQzZCNEQ2JyB0cmFuc2Zvcm09J3JvdGF0ZSgyMTYpJy8+CiAgICA8ZWxsaXBzZSBjeD0nMCcgY3k9Jy02JyByeD0nNScgcnk9JzcuNScgZmlsbD0nI0M2QjRENicgdHJhbnNmb3JtPSdyb3RhdGUoMjg4KScvPgogICAgPGNpcmNsZSBjeD0nMCcgY3k9JzAnIHI9JzMnIGZpbGw9JyNDOUE2NkInLz4KICA8L2c+Cjwvc3ZnPg==");
+    background-repeat:repeat-y;
+    background-size:26px 70px;
+    transform:scaleX(-1);
+  }
+
+  /* switched to a real rose-photo frame; hide the old illustrated SVG florals */
+  .vine, .edge-border{ display:none !important; }
+
+  .rose-frame{ display:none !important; }
+  ._unused_rose_frame_rule{
+    position:absolute;
+    inset:-14px;
+    width:calc(100% + 28px);
+    height:calc(100% + 28px);
+    object-fit:fill;
+    pointer-events:none;
+    z-index:-1;
+    opacity:0;
+    animation:fadeUp 1.6s ease-out 0.5s forwards;
+  }
+
+  .lower-panel{
+    position:relative;
+    z-index:2;
+    border-radius:4px;
+    margin-top:8px;
+    padding:0px 14px 4px;
+  }
+
+  .bloom-g{
+    opacity:0;
+    transform-box: fill-box;
+    transform-origin: 50% 50%;
+    transform: scale(0.25);
+    animation: bloomPop 0.7s cubic-bezier(.34,1.56,.64,1) forwards;
+  }
+  @keyframes bloomPop{ to{opacity:1; transform:scale(1);} }
+
+  .bloom{
+    position:absolute;
+    border-radius:50%;
+    opacity:0;
+    animation:bloomIn 0.9s ease-out forwards;
+  }
+  @keyframes bloomIn{
+    from{opacity:0; transform:scale(0.3);}
+    to{opacity:0.9; transform:scale(1);}
+  }
+
+  .top-flourish{
+    display:flex;
+    justify-content:center;
+    margin-bottom:6px;
+    opacity:0;
+    animation:fadeUp 1s ease-out 0.95s forwards;
+  }
+
+  .monogram-wrap{
+    position:relative;
+    width:64px;
+    margin:0 auto 6px;
+  }
+  .wreath-bloom{
+    position:absolute;
+    opacity:0;
+    animation:bloomPop 0.7s cubic-bezier(.34,1.56,.64,1) forwards;
+  }
+  .wreath-bloom.left{left:-26px; top:22px; animation-delay:1.55s;}
+  .wreath-bloom.right{right:-26px; top:22px; animation-delay:1.6s;}
+
+  .rings-icon{
+    display:block;
+    margin:10px auto 4px;
+    opacity:0;
+    animation:fadeUp 1s ease-out 1.3s forwards;
+  }
+
+  .monogram{
+    width:64px;height:64px;
+    margin:25px auto 18px;
+    /*border:1px solid var(--gold);*/
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:22px;
+    color:var(--olive-dark);
+    letter-spacing:1px;
+    opacity:0;
+    animation:fadeUp 1s ease-out 1.1s forwards;
+    margin-bottom:0px;
+  }
+  @keyframes fadeUp{
+    from{opacity:0; transform:translateY(10px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+  .fade{opacity:0; animation:fadeUp 1s ease-out forwards;}
+  .verse{margin-top:0px;font-style:italic; font-size:14.5px; color:#7A7A6E; line-height:1.7; animation-delay:1.3s;}
+  .families{
+    font-size:14px;
+    letter-spacing:3.5px;
+    color:var(--olive-dark);
+    margin:22px 0 6px;
+    animation-delay:1.5s;
+  }
+  .lead{font-size:13.5px; font-style:italic; color:#7A7A6E; line-height:1.7em; animation-delay:1.65s;}
+
+  .names{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:400;
+    color:var(--olive-dark);
+    letter-spacing:4px;
+  }
+  .name{
+    font-size:clamp(38px,8vw,52px);
+    opacity:0;
+    position:relative;
+    background:linear-gradient(100deg, var(--olive-dark) 40%, var(--gold) 50%, var(--olive-dark) 60%);
+    background-size:280% 100%;
+    background-position:100% 0;
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation:nameIn 1.1s cubic-bezier(.16,.8,.28,1) forwards, shimmer 5s ease-in-out 3.6s infinite;
+  }
+  .name.julien{animation-delay:1.8s, 4.2s;}
+  .name.angie{animation-delay:2.35s, 4.6s;}
+  @keyframes shimmer{
+    0%,88%,100%{background-position:100% 0;}
+    94%{background-position:0% 0;}
+  }
+  @keyframes nameIn{
+    from{opacity:0; letter-spacing:10px; transform:translateY(14px);}
+    to{opacity:1; letter-spacing:4px; transform:translateY(0);}
+  }
+  .and{
+    font-family:'Parisienne', cursive;
+    font-size:26px;
+    color:var(--blush);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    margin:6px 0;
+    opacity:0;
+    animation:fadeUp 1s ease-out 2.15s forwards;
+  }
+  .and .line{height:1px; width:44px; background:linear-gradient(90deg, transparent, var(--gold), transparent);}
+
+  .details{margin-top:26px; font-size:14.5px; line-height:1.9; color:var(--ink); animation-delay:2.7s;}
+  .details b{font-weight:500; color:var(--olive-dark);}
+  .dinner{font-style:italic; color:#7A7A6E; font-size:13.5px; margin-top:10px; line-height:1.7em; animation-delay:2.85s;}
+  .invitees{font-size:12px; letter-spacing:1px; color:#9a9a8c; margin-top:16px; animation-delay:3s;}
+
+  .divider{
+    width:60px;height:1px;
+    background:var(--gold);
+    margin:22px auto;
+    opacity:0;
+    animation:divIn 0.9s ease-out 3.05s forwards;
+    transform-origin:center;
+    position:relative;
+  }
+  .divider::after{
+    content:'';
+    position:absolute;
+    top:50%; left:50%;
+    width:7px;height:7px;
+    background:var(--gold);
+    transform:translate(-50%,-50%) rotate(45deg);
+  }
+  @keyframes divIn{ from{opacity:0; width:0;} to{opacity:1; width:60px;} }
+
+  .list-info{font-size:13px; color:#7A7A6E; line-height:1.9; animation-delay:3.15s;}
+  .rsvp{font-size:13.5px; margin-top:10px; line-height:1.7;animation-delay:3.3s;}
+  .contacts{font-size:13px; letter-spacing:0.5px; color:var(--olive-dark); margin-top:6px; animation-delay:3.4s;}
+
+  .links{
+    margin-top:14px;
+    margin-bottom:30px;
+    display:flex;
+    gap:8px;
+    justify-content:center;
+    flex-wrap:wrap;
+    animation-delay:3.55s;
+  }
+  .links a{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+    flex:1 1 auto;
+    font-size:11.5px;
+    color:var(--olive-dark);
+    text-decoration:none;
+    font-style:normal;
+    font-weight:500;
+    letter-spacing:0.2px;
+    background:#FFFDF9;
+    border:1px solid var(--gold);
+    border-radius:999px;
+    padding:7px 13px;
+    text-align:center;
+    box-shadow:0 4px 10px -6px rgba(60,50,20,0.3);
+    transition:background 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
+  }
+  .links a:hover, .links a:active{
+    background:var(--gold);
+    color:#FFFDF9;
+    transform:translateY(-1px);
+    box-shadow:0 8px 20px -8px rgba(60,50,20,0.45);
+  }
+
+  @media (max-width:480px){
+    body{
+      align-items:flex-start;
+      padding:20px 0 32px;
+    }
+    .card{
+      width:min(97vw, 560px);
+      padding:32px 18px 48px;
+      background-size:100% 100%;
+    }
+    .links{
+      flex-direction:column;
+      align-items:center;
+      gap:7px;
+    }
+    .links a{
+      width:50%;
+      padding:9px 14px;
+      font-size:12px;
+    }
+  }
+
+  @media (min-width:481px) and (max-width:768px){
+    .card{
+      padding:44px 30px 62px;
+    }
+    .links{
+      gap:8px;
+    }
+    .links a{
+      font-size:12px;
+      padding:8px 13px;
+    }
+  }
+
+  .venue-photo{
+    margin:22px auto 4px;
+    max-width:220px;
+    opacity:0;
+    animation:fadeUp 1s ease-out 3.4s forwards;
+  }
+  .venue-photo-frame{
+    position:relative;
+    padding:8px;
+    background:#FFFDF9;
+    border:1px solid var(--gold);
+    box-shadow:
+      0 0 0 5px #FFFDF9,
+      0 0 0 6px rgba(201,166,107,0.55),
+      0 20px 40px -18px rgba(60,50,20,0.45);
+    border-radius:2px;
+  }
+  .venue-photo-frame img{
+    display:block;
+    width:100%;
+    height:auto;
+    border-radius:1px;
+    filter:sepia(0.12) saturate(1.05) contrast(1.02);
+    transition:filter 0.25s ease, transform 0.25s ease;
+  }
+  .venue-photo-frame a{
+    display:block;
+    cursor:pointer;
+  }
+  .venue-photo-frame a:hover img{
+    filter:sepia(0.05) saturate(1.1) contrast(1.03);
+    transform:scale(1.015);
+  }
+  .venue-photo-frame::before{
+    content:'';
+    position:absolute;
+    inset:3px;
+    border:1px solid rgba(201,166,107,0.5);
+    pointer-events:none;
+  }
+  .venue-caption{
+    margin-top:10px;
+    font-family:'EB Garamond', serif;
+    font-style:italic;
+    font-size:12px;
+    letter-spacing:0.3px;
+    color:#8a8a7c;
+    text-align:center;
+  }
+
+  /* music control */
+  .music-btn{
+    position:fixed;
+    bottom:22px;
+    right:22px;
+    width:52px;height:52px;
+    border-radius:50%;
+    border:1px solid var(--gold);
+    background:#FFFDF9;
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;
+    box-shadow:0 8px 24px -8px rgba(60,50,20,0.35);
+    z-index:10;
+    transition:transform 0.2s;
+  }
+  .music-btn:hover{transform:scale(1.06);}
+  .music-btn svg{width:20px;height:20px;fill:var(--olive-dark);}
+  .music-btn.playing svg.play{display:none;}
+  .music-btn:not(.playing) svg.pause{display:none;}
+  .music-hint{
+    position:fixed;
+    bottom:32px;
+    right:82px;
+    font-family:'EB Garamond', serif;
+    font-style:italic;
+    font-size:12.5px;
+    color:#8a8a7c;
+    background:#FFFDF9;
+    padding:6px 12px;
+    border-radius:20px;
+    box-shadow:0 6px 18px -8px rgba(60,50,20,0.3);
+    opacity:0;
+    animation:fadeUp 0.8s ease-out 4s forwards;
+    z-index:10;
+    white-space:nowrap;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important;}
+  }
+
+
+  /* --- envelope intro screen --- */
+  #inviteContent{
+    opacity:0;
+    visibility:hidden;
+    transition: opacity 1s ease;
+  }
+  #inviteContent.revealed{
+    opacity:1;
+    visibility:visible;
+  }
+
+  #envelopeScreen{
+    position:fixed;
+    inset:0;
+    background:
+      radial-gradient(circle at 50% 38%, #FDFAF3 0%, #F3EAD8 55%, #EAD9BB 100%);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    z-index:999;
+    cursor:pointer;
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+  #envelopeScreen.hide{
+    opacity:0;
+    transform:scale(1.06);
+    pointer-events:none;
+  }
+  .envelope-title{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:clamp(19px,4.2vw,27px);
+    color:var(--olive-dark);
+    letter-spacing:0.5px;
+    text-align:center;
+    margin-bottom:26px;
+    opacity:0;
+    animation:fadeUp 1s ease-out 0.35s forwards;
+  }
+  .envelope-svg-wrap{
+    width:min(74vw,290px);
+    filter:drop-shadow(0 18px 38px rgba(60,50,20,0.28));
+    opacity:0;
+    animation:fadeUp 1.1s ease-out 0.15s forwards;
+  }
+  .envelope-hint{
+    margin-top:22px;
+    font-family:'EB Garamond', serif;
+    font-style:italic;
+    font-size:12.5px;
+    letter-spacing:0.5px;
+    color:#8a8a7c;
+    opacity:0;
+    animation:fadeUp 1s ease-out 1s forwards, hintPulse 2.4s ease-in-out 1.8s infinite;
+  }
+  @keyframes hintPulse{
+    0%,100%{opacity:0.55;}
+    50%{opacity:1;}
+  }
+  #flapTop{
+    transform-box:fill-box;
+    transform-origin:50% 0%;
+    transition:transform 0.7s cubic-bezier(.6,.1,.3,1), opacity 0.6s ease;
+  }
+  #envelopeScreen.opening #flapTop{
+    transform:translateY(-16px) rotate(-7deg);
+    opacity:0;
+  }
+  #seal{
+    transform-box:fill-box;
+    transform-origin:50% 50%;
+    transition:transform 0.5s ease, opacity 0.5s ease;
+  }
+  #envelopeScreen.opening #seal{
+    transform:scale(0.4) rotate(20deg);
+    opacity:0;
+  }
+</style>
+</head>
+<body>
+
+<div id="envelopeScreen">
+  <div class="envelope-title">💍 Բարի եկած էք մեր Պսակին</div>
+  <div class="envelope-svg-wrap">
+    <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+      <rect x="10" y="10" width="280" height="180" rx="6" fill="#FBF6EE" stroke="var(--gold)" stroke-width="1.5"/>
+      <path d="M10,190 L150,110 L290,190 Z" fill="#F3E4CE" stroke="var(--gold)" stroke-width="1" opacity="0.9"/>
+      <g id="flapTop">
+        <path d="M10,10 L150,95 L290,10 Z" fill="#F0E6CE" stroke="var(--gold)" stroke-width="1.2"/>
+      </g>
+      <g id="seal">
+        <circle cx="150" cy="95" r="28" fill="#B8894F" opacity="0.35"/>
+        <circle cx="150" cy="93" r="26" fill="var(--gold)"/>
+        <circle cx="150" cy="93" r="26" fill="none" stroke="#8a6a3a" stroke-width="1" opacity="0.5"/>
+        <text x="150" y="99" text-anchor="middle" font-family="Cormorant Garamond, serif" font-style="italic" font-size="20" fill="#FFFDF9">J &amp; A</text>
+      </g>
+    </svg>
+  </div>
+  <div class="envelope-hint">tap to open</div>
+</div>
+
+<div id="inviteContent">
+
+<div class="glow a"></div>
+<div class="glow b"></div>
+<div class="glow c"></div>
+
+<div class="card" id="card">
+  <img class="rose-frame" src="../assets/Gold-Vintage-Ornate-Frame.jpg.jpeg" alt="">
+  <div class="edge-border top"></div>
+  <div class="edge-border bottom"></div>
+  <div class="edge-border left"></div>
+  <div class="edge-border right"></div>
+
+  <div class="vine tl"><svg viewBox="0 0 150 150">
+    <path d="M5,5 C 20,40 10,70 40,80 C 70,90 60,50 90,55 C 115,59 110,90 140,95"/>
+    <g class="bloom-g" style="animation-delay:1.85s">
+      <ellipse cx="22" cy="42" rx="6" ry="2.6" fill="var(--olive)" opacity="0.85" transform="rotate(-40 22 42)"/>
+      <ellipse cx="17" cy="50" rx="5" ry="2.2" fill="var(--olive)" opacity="0.75" transform="rotate(20 17 50)"/>
+    </g>
+    <g class="bloom-g" style="animation-delay:2.0s">
+      <g transform="translate(13,11) scale(1.05)">
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--blush)" transform="rotate(0)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--blush)" transform="rotate(72)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--blush)" transform="rotate(144)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--blush)" transform="rotate(216)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--blush)" transform="rotate(288)"/>
+        <circle cx="0" cy="0" r="3.2" fill="var(--gold)"/>
+      </g>
+    </g>
+    <g class="bloom-g" style="animation-delay:2.05s">
+      <ellipse cx="63" cy="70" rx="6" ry="2.5" fill="var(--olive)" opacity="0.8" transform="rotate(30 63 70)"/>
+      <ellipse cx="70" cy="65" rx="5" ry="2.2" fill="var(--olive)" opacity="0.7" transform="rotate(-25 70 65)"/>
+    </g>
+    <g class="bloom-g" style="animation-delay:2.15s">
+      <g transform="translate(41,78) scale(0.85)">
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--lilac)" transform="rotate(0)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--lilac)" transform="rotate(72)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--lilac)" transform="rotate(144)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--lilac)" transform="rotate(216)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--lilac)" transform="rotate(288)"/>
+        <circle cx="0" cy="0" r="3" fill="var(--gold)"/>
+      </g>
+    </g>
+    <g class="bloom-g" style="animation-delay:2.2s">
+      <ellipse cx="105" cy="70" rx="6" ry="2.5" fill="var(--olive)" opacity="0.8" transform="rotate(-20 105 70)"/>
+    </g>
+    <g class="bloom-g" style="animation-delay:2.3s">
+      <g transform="translate(89,51) scale(0.9)">
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="#EFD3B8" transform="rotate(0)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="#EFD3B8" transform="rotate(72)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="#EFD3B8" transform="rotate(144)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="#EFD3B8" transform="rotate(216)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="#EFD3B8" transform="rotate(288)"/>
+        <circle cx="0" cy="0" r="3" fill="var(--gold)"/>
+      </g>
+    </g>
+    <g class="bloom-g" style="animation-delay:2.45s">
+      <g transform="translate(134,90) scale(0.6)">
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--skyblue)" transform="rotate(0)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--skyblue)" transform="rotate(72)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--skyblue)" transform="rotate(144)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--skyblue)" transform="rotate(216)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--skyblue)" transform="rotate(288)"/>
+        <circle cx="0" cy="0" r="3" fill="var(--gold)"/>
+      </g>
+    </g>
+  </svg></div>
+  <div class="vine tr"><svg viewBox="0 0 150 150">
+    <path d="M5,5 C 20,40 10,70 40,80 C 70,90 60,50 90,55 C 115,59 110,90 140,95"/>
+    <g class="bloom-g" style="animation-delay:1.85s">
+      <ellipse cx="22" cy="42" rx="6" ry="2.6" fill="var(--olive)" opacity="0.85" transform="rotate(-40 22 42)"/>
+      <ellipse cx="17" cy="50" rx="5" ry="2.2" fill="var(--olive)" opacity="0.75" transform="rotate(20 17 50)"/>
+    </g>
+    <g class="bloom-g" style="animation-delay:2.0s">
+      <g transform="translate(13,11) scale(1.05)">
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--blush)" transform="rotate(0)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--blush)" transform="rotate(72)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--blush)" transform="rotate(144)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--blush)" transform="rotate(216)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--blush)" transform="rotate(288)"/>
+        <circle cx="0" cy="0" r="3.2" fill="var(--gold)"/>
+      </g>
+    </g>
+    <g class="bloom-g" style="animation-delay:2.05s">
+      <ellipse cx="63" cy="70" rx="6" ry="2.5" fill="var(--olive)" opacity="0.8" transform="rotate(30 63 70)"/>
+      <ellipse cx="70" cy="65" rx="5" ry="2.2" fill="var(--olive)" opacity="0.7" transform="rotate(-25 70 65)"/>
+    </g>
+    <g class="bloom-g" style="animation-delay:2.15s">
+      <g transform="translate(41,78) scale(0.85)">
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--lilac)" transform="rotate(0)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--lilac)" transform="rotate(72)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--lilac)" transform="rotate(144)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--lilac)" transform="rotate(216)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--lilac)" transform="rotate(288)"/>
+        <circle cx="0" cy="0" r="3" fill="var(--gold)"/>
+      </g>
+    </g>
+    <g class="bloom-g" style="animation-delay:2.2s">
+      <ellipse cx="105" cy="70" rx="6" ry="2.5" fill="var(--olive)" opacity="0.8" transform="rotate(-20 105 70)"/>
+    </g>
+    <g class="bloom-g" style="animation-delay:2.3s">
+      <g transform="translate(89,51) scale(0.9)">
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="#EFD3B8" transform="rotate(0)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="#EFD3B8" transform="rotate(72)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="#EFD3B8" transform="rotate(144)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="#EFD3B8" transform="rotate(216)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="#EFD3B8" transform="rotate(288)"/>
+        <circle cx="0" cy="0" r="3" fill="var(--gold)"/>
+      </g>
+    </g>
+    <g class="bloom-g" style="animation-delay:2.45s">
+      <g transform="translate(134,90) scale(0.6)">
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--skyblue)" transform="rotate(0)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--skyblue)" transform="rotate(72)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--skyblue)" transform="rotate(144)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--skyblue)" transform="rotate(216)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--skyblue)" transform="rotate(288)"/>
+        <circle cx="0" cy="0" r="3" fill="var(--gold)"/>
+      </g>
+    </g>
+  </svg></div>
+  <div class="vine bl"><svg viewBox="0 0 150 150">
+    <path d="M5,5 C 20,40 10,70 40,80 C 70,90 60,50 90,55 C 115,59 110,90 140,95"/>
+    <g class="bloom-g" style="animation-delay:1.85s">
+      <ellipse cx="22" cy="42" rx="6" ry="2.6" fill="var(--olive)" opacity="0.85" transform="rotate(-40 22 42)"/>
+      <ellipse cx="17" cy="50" rx="5" ry="2.2" fill="var(--olive)" opacity="0.75" transform="rotate(20 17 50)"/>
+    </g>
+    <g class="bloom-g" style="animation-delay:2.0s">
+      <g transform="translate(13,11) scale(1.05)">
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--blush)" transform="rotate(0)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--blush)" transform="rotate(72)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--blush)" transform="rotate(144)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--blush)" transform="rotate(216)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--blush)" transform="rotate(288)"/>
+        <circle cx="0" cy="0" r="3.2" fill="var(--gold)"/>
+      </g>
+    </g>
+    <g class="bloom-g" style="animation-delay:2.05s">
+      <ellipse cx="63" cy="70" rx="6" ry="2.5" fill="var(--olive)" opacity="0.8" transform="rotate(30 63 70)"/>
+      <ellipse cx="70" cy="65" rx="5" ry="2.2" fill="var(--olive)" opacity="0.7" transform="rotate(-25 70 65)"/>
+    </g>
+    <g class="bloom-g" style="animation-delay:2.15s">
+      <g transform="translate(41,78) scale(0.85)">
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--lilac)" transform="rotate(0)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--lilac)" transform="rotate(72)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--lilac)" transform="rotate(144)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--lilac)" transform="rotate(216)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--lilac)" transform="rotate(288)"/>
+        <circle cx="0" cy="0" r="3" fill="var(--gold)"/>
+      </g>
+    </g>
+    <g class="bloom-g" style="animation-delay:2.2s">
+      <ellipse cx="105" cy="70" rx="6" ry="2.5" fill="var(--olive)" opacity="0.8" transform="rotate(-20 105 70)"/>
+    </g>
+    <g class="bloom-g" style="animation-delay:2.3s">
+      <g transform="translate(89,51) scale(0.9)">
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="#EFD3B8" transform="rotate(0)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="#EFD3B8" transform="rotate(72)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="#EFD3B8" transform="rotate(144)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="#EFD3B8" transform="rotate(216)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="#EFD3B8" transform="rotate(288)"/>
+        <circle cx="0" cy="0" r="3" fill="var(--gold)"/>
+      </g>
+    </g>
+    <g class="bloom-g" style="animation-delay:2.45s">
+      <g transform="translate(134,90) scale(0.6)">
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--skyblue)" transform="rotate(0)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--skyblue)" transform="rotate(72)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--skyblue)" transform="rotate(144)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--skyblue)" transform="rotate(216)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--skyblue)" transform="rotate(288)"/>
+        <circle cx="0" cy="0" r="3" fill="var(--gold)"/>
+      </g>
+    </g>
+  </svg></div>
+  <div class="vine br"><svg viewBox="0 0 150 150">
+    <path d="M5,5 C 20,40 10,70 40,80 C 70,90 60,50 90,55 C 115,59 110,90 140,95"/>
+    <g class="bloom-g" style="animation-delay:1.85s">
+      <ellipse cx="22" cy="42" rx="6" ry="2.6" fill="var(--olive)" opacity="0.85" transform="rotate(-40 22 42)"/>
+      <ellipse cx="17" cy="50" rx="5" ry="2.2" fill="var(--olive)" opacity="0.75" transform="rotate(20 17 50)"/>
+    </g>
+    <g class="bloom-g" style="animation-delay:2.0s">
+      <g transform="translate(13,11) scale(1.05)">
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--blush)" transform="rotate(0)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--blush)" transform="rotate(72)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--blush)" transform="rotate(144)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--blush)" transform="rotate(216)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--blush)" transform="rotate(288)"/>
+        <circle cx="0" cy="0" r="3.2" fill="var(--gold)"/>
+      </g>
+    </g>
+    <g class="bloom-g" style="animation-delay:2.05s">
+      <ellipse cx="63" cy="70" rx="6" ry="2.5" fill="var(--olive)" opacity="0.8" transform="rotate(30 63 70)"/>
+      <ellipse cx="70" cy="65" rx="5" ry="2.2" fill="var(--olive)" opacity="0.7" transform="rotate(-25 70 65)"/>
+    </g>
+    <g class="bloom-g" style="animation-delay:2.15s">
+      <g transform="translate(41,78) scale(0.85)">
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--lilac)" transform="rotate(0)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--lilac)" transform="rotate(72)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--lilac)" transform="rotate(144)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--lilac)" transform="rotate(216)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--lilac)" transform="rotate(288)"/>
+        <circle cx="0" cy="0" r="3" fill="var(--gold)"/>
+      </g>
+    </g>
+    <g class="bloom-g" style="animation-delay:2.2s">
+      <ellipse cx="105" cy="70" rx="6" ry="2.5" fill="var(--olive)" opacity="0.8" transform="rotate(-20 105 70)"/>
+    </g>
+    <g class="bloom-g" style="animation-delay:2.3s">
+      <g transform="translate(89,51) scale(0.9)">
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="#EFD3B8" transform="rotate(0)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="#EFD3B8" transform="rotate(72)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="#EFD3B8" transform="rotate(144)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="#EFD3B8" transform="rotate(216)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="#EFD3B8" transform="rotate(288)"/>
+        <circle cx="0" cy="0" r="3" fill="var(--gold)"/>
+      </g>
+    </g>
+    <g class="bloom-g" style="animation-delay:2.45s">
+      <g transform="translate(134,90) scale(0.6)">
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--skyblue)" transform="rotate(0)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--skyblue)" transform="rotate(72)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--skyblue)" transform="rotate(144)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--skyblue)" transform="rotate(216)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--skyblue)" transform="rotate(288)"/>
+        <circle cx="0" cy="0" r="3" fill="var(--gold)"/>
+      </g>
+    </g>
+  </svg></div>
+
+  <!-- <div class="top-flourish">
+    <svg viewBox="0 0 60 34" width="60" height="34">
+      <g transform="translate(30,22) scale(0.9)">
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--blush)" transform="rotate(0)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--blush)" transform="rotate(72)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--blush)" transform="rotate(144)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--blush)" transform="rotate(216)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--blush)" transform="rotate(288)"/>
+        <circle cx="0" cy="0" r="3.2" fill="var(--gold)"/>
+      </g>
+      <ellipse cx="10" cy="26" rx="5" ry="2.2" fill="var(--olive)" opacity="0.75" transform="rotate(20 10 26)"/>
+      <ellipse cx="50" cy="26" rx="5" ry="2.2" fill="var(--olive)" opacity="0.75" transform="rotate(-20 50 26)"/>
+    </svg>
+  </div> -->
+
+  <div class="monogram-wrap">
+    <!-- <svg class="wreath-bloom left" width="20" height="20" viewBox="0 0 20 20">
+      <g transform="translate(10,10) scale(0.6)">
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--lilac)" transform="rotate(0)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--lilac)" transform="rotate(72)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--lilac)" transform="rotate(144)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--lilac)" transform="rotate(216)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--lilac)" transform="rotate(288)"/>
+        <circle cx="0" cy="0" r="3" fill="var(--gold)"/>
+      </g>
+    </svg>
+    <svg class="wreath-bloom right" width="20" height="20" viewBox="0 0 20 20">
+      <g transform="translate(10,10) scale(0.6)">
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--skyblue)" transform="rotate(0)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--skyblue)" transform="rotate(72)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--skyblue)" transform="rotate(144)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--skyblue)" transform="rotate(216)"/>
+        <ellipse cx="0" cy="-6" rx="5" ry="7.5" fill="var(--skyblue)" transform="rotate(288)"/>
+        <circle cx="0" cy="0" r="3" fill="var(--gold)"/>
+      </g>
+    </svg> -->
+    <div class="monogram">J&amp;A</div>
+  </div>
+
+  <!-- <svg class="rings-icon" width="34" height="20" viewBox="0 0 34 20">
+    <circle cx="13" cy="10" r="7" fill="none" stroke="var(--gold)" stroke-width="1.6"/>
+    <circle cx="21" cy="10" r="7" fill="none" stroke="var(--gold)" stroke-width="1.6"/>
+  </svg> -->
+
+  <p class="verse fade">Ինչ որ Աստուած միացուց <br>թող մարդ չբաժնէ :<br>~ Մարկոս 10 : 9</p>
+
+  <p class="families fade">Թումա եւ Քիրէճեան ընտանիքները</p>
+  <p class="lead fade">Սիրով կը հրաւիրեն ձեզ ներկայ<br>գտնուելու իրենց որդւոյն եւ դստեր՝</p>
+
+  <div class="names">
+    <div class="name julien">Ժիւլեանի</div>
+    <div class="and"><span class="line"></span>եւ<span class="line"></span></div>
+    <div class="name angie">Էնժիի</div>
+  </div>
+
+  <div class="details fade">
+    <b>Ս. Պսակի Խորհուրդին, որ տեղի պիտի<br>ունենայ, Շաբաթ 12 Սեպտեմբեր, 2026-ին<br>
+    </b> ժամը <b>6:00-ին</b> Ասորիներու Ս. Աւետման <br>
+    Կաթողիկէ Եկեղեցւոյ մէջ – Մադհաֆ
+  </div>
+  <p class="dinner fade">Հարսանեկան խրախճանքը տեղի պիտի <br>ունենայ, Նասամաթ Ճաշարան - Քլէյաթ, </br>
+    ժամը <b>8:00-ին</b></p>
+
+  <div class="divider"></div>
+
+  <div class="lower-panel">
+  <p class="list-info fade">Փափաքողներու համար, հարսանեկան 
+    <br>հաշիւ մը  տրամադրուած է<br>
+    Whish Money հաշիւի թիւ: 20474075-03</p>
+
+  <p class="rsvp fade">Հաճեցէ՛ք ձեր ներկայութիւնը հաստատել  <br>մինչեւ <b>31 Օգոստոս 2026</b></p>
+  <p class="contacts fade">Ժիւլեան: 03 356 610 &nbsp;|&nbsp; Էնժի: 70 318 857</p>
+
+  <div class="links fade">
+    <a href="https://www.google.com/maps/place/N.d.+De+L'annonciation+-+Church/@33.8796358,35.5175006,1270m/data=!3m2!1e3!4b1!4m6!3m5!1s0x151f17068bc34127:0xe25b18d91793dc21!8m2!3d33.8796358!4d35.5175006!16s%2Fg%2F1tdhvw99?entry=ttu&amp;g_ep=EgoyMDI2MDcwNS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">⛪ Եկեղեցի</a>
+    <a href="https://www.google.com/maps/place/Al+Nasamat+النسمات‭/@33.958999,35.7143285,17z/data=!3m1!4b1!4m6!3m5!1s0x151f47bf085eaeb9:0xd62a58ef83ca30cb!8m2!3d33.958999!4d35.7169034!16s%2Fg%2F11c601x3rx?entry=tts&amp;g_ep=EgoyMDI2MDYwOS4wIPu8ASoASAFQAw%3D%3D&amp;skid=a3ca23ba-ed85-40a2-8d0d-c9d7d65f0572" target="_blank" rel="noopener">🍽️ Ճաշարան</a>
+  </div>
+  </div>
+</div>
+
+<button class="music-btn" id="musicBtn" aria-label="Toggle music">
+  <svg class="play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+  <svg class="pause" viewBox="0 0 24 24"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+</button>
+<div class="music-hint">♪ tap for music</div>
+
+<audio id="bgMusic" loop preload="auto" src="../assets/song.mp3"></audio>
+
+</div>
+
+<script>
+  // --- envelope intro: click/tap to open, then reveal the invitation ---
+  const envelopeScreen = document.getElementById('envelopeScreen');
+  const inviteContent = document.getElementById('inviteContent');
+
+  envelopeScreen.addEventListener('click', () => {
+    startMusic();
+    envelopeScreen.classList.add('opening');
+    setTimeout(() => {
+      envelopeScreen.classList.add('hide');
+      inviteContent.classList.add('revealed');
+    }, 650);
+    setTimeout(() => {
+      envelopeScreen.style.display = 'none';
+    }, 1600);
+  });
+
+  // --- floating petals ---
+  //const colors = ['#E8A9A6','#C6B4D6','#A9C4D4','#C9A66B','#EFD9CE'];
+  const colors = ['#C9A66B','#C9A66B','#C9A66B','#C9A66B','#C9A66B'];
+  const petalContainer = document.body;
+  for(let i=0;i<18;i++){
+    const p = document.createElement('div');
+    p.className='petal';
+    const size = 8+Math.random()*10;
+    p.style.left = (Math.random()*100)+'vw';
+    p.style.width = size+'px';
+    p.style.height = size+'px';
+    p.style.background = colors[Math.floor(Math.random()*colors.length)];
+    p.style.borderRadius = '0 60% 0 60%';
+    const dur = 10+Math.random()*10;
+    p.style.animationDuration = dur+'s, '+(3+Math.random()*2)+'s';
+    p.style.animationDelay = (Math.random()*-dur)+'s, 0s';
+    petalContainer.appendChild(p);
+  }
+
+  // --- background music (mp3): try to autoplay immediately; if the browser
+  // blocks it (which most do until the user interacts with the page), fall
+  // back to starting on the very first click/tap/keypress anywhere on the page ---
+  const audio = document.getElementById('bgMusic');
+  const btn = document.getElementById('musicBtn');
+  let started = false;
+
+  function startMusic(){
+    if(started) return;
+    audio.play().then(()=>{
+      started = true;
+      btn.classList.add('playing');
+    }).catch(()=>{
+      // autoplay blocked — will retry on first user interaction
+    });
+  }
+
+  // attempt autoplay once the page has fully loaded
+  window.addEventListener('load', startMusic);
+
+  // fallback: first interaction anywhere on the page starts it
+  const autoplayFallback = () => {
+    if(!started){
+      startMusic();
+    }
+    document.removeEventListener('click', autoplayFallback);
+    document.removeEventListener('touchstart', autoplayFallback);
+    document.removeEventListener('keydown', autoplayFallback);
+  };
+  document.addEventListener('click', autoplayFallback);
+  document.addEventListener('touchstart', autoplayFallback);
+  document.addEventListener('keydown', autoplayFallback);
+
+  btn.addEventListener('click', (e)=>{
+    e.stopPropagation();
+    if(!started){
+      startMusic();
+    } else if(audio.paused){
+      audio.play();
+      btn.classList.add('playing');
+    } else {
+      audio.pause();
+      btn.classList.remove('playing');
+    }
+  });
+</script>
+</body>
+</html>
